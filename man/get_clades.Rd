@@ -4,12 +4,10 @@
 \alias{get_clades}
 \title{Get the clades in a tree}
 \usage{
-get_clades(tree, labels)
+get_clades(tree)
 }
 \arguments{
 \item{tree}{a phylo object}
-
-\item{labels}{labels for the tips}
 }
 \value{
 a vector with the 2n-1 clades
