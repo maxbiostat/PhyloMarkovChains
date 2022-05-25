@@ -1,0 +1,13 @@
+Package: PhyloMarkovChains
+Title: Tree-valued Markov chains
+Version: 0.0.0.9000
+Authors@R: 
+    person("Luiz", "Carvalho", , "lmax.fgv@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-5736-5578"))
+Description: Contains routines for simulating and studying Markov chains on the space of phylogenetic trees.
+Imports:
+    ape, apTreeshape,  phangorn
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
