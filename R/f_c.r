@@ -28,6 +28,16 @@ f_c <- function(phy, clade){
   )
 }
 
+#' Safe version of \code{f_c}
+#'
+#' @param phy a phylo object.
+#' @param clade a list of tip names in a clade.
+#'
+#' @return a list with two phylo objects: one is the tree without the clade and
+#'  the other is the subtree with the clade. Or \code{NA} if
+#'   the clade is not compatible with \code{phy}
+#' @export safe_f_c
+#'
 safe_f_c <- function(phy, clade){
   tryCatch(
     f_c(phy, clade),
