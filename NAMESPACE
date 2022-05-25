@@ -2,6 +2,8 @@
 
 export(Nsize_ratio)
 export(balanced_neighbourhood)
+export(clade_index)
+export(clade_indicators)
 export(f_c)
 export(get_clades)
 export(get_largest_clade)

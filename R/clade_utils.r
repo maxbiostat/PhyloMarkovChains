@@ -1,4 +1,24 @@
-clade_index <- function(x, all.splits) charmatch(x, all.splits)
+
+#' Get clade index
+#'
+#' @param x the clade as a vector of tip labels
+#' @param all.splits a list of all clades (splits)
+#'
+#' @return an index
+#' @export clade_index
+clade_index <- function(x, all.splits){
+  charmatch(x, all.splits)
+} 
+
+#' Construct clade indicators
+#'
+#' @param ind indices that should be \code{1}
+#' @param L size of the indicator vector
+#'
+#' @return a binary vector with which clades are present (1) and which are absent (0)
+#' @export clade_indicators
+#'
+#' @examples
 clade_indicators <- function(ind, L){
   out <- rep(0, L)
   out[ind] <- 1
