@@ -3,6 +3,7 @@
 export(Nsize_ratio)
 export(balanced_neighbourhood)
 export(f_c)
+export(get_clades)
 export(get_largest_clade)
 export(get_random_clade)
 export(ladder_neighbourhood)
