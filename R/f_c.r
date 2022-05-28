@@ -23,7 +23,7 @@ f_c <- function(phy, clade){
   return(
     list(
       x_prime = wo.clade,
-      tau_x_c = other.side
+      phi_x_c = other.side
     )
   )
 }
