@@ -42,7 +42,9 @@ rspr_matrix <- function(trees,
                         type = c("restricted", "onerow", "full"),
                         maxdist = 1){ 
   type <- match.arg(type)
-  if(class(trees)!="multiPhylo") stop("Input is not of class multiPhylo")   
+  
+  if(!inherits(trees, "multiPhylo")) stop("Input is not of class multiPhylo") 
+  
   root.test <- unlist(lapply(trees, ape::is.rooted)) # testing if trees are rooted
   tmp <- tempfile("rsprmatrix", fileext = ".csv") # Unfortunately, we'll have to resort to this hack for the time being.
   if(type == "restricted"){

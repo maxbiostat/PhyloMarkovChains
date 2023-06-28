@@ -18,7 +18,6 @@ clade_index <- function(x, all.splits){
 #' @return a binary vector with which clades are present (1) and which are absent (0)
 #' @export clade_indicators
 #'
-#' @examples
 clade_indicators <- function(ind, L){
   out <- rep(0, L)
   out[ind] <- 1
