@@ -30,6 +30,94 @@ makeLadder <- function(ntaxa){
   return(tmplad)
 }
 
+
+#' Compute the gamma of an internal node
+#'
+#'  This function gives the gamma of the internal node in a phylogenetic tree.
+#'
+#' @param tr Phylogenetic tree.
+#' @param no Internal node.
+#'
+#' @return The corresponding gamma, defined in Song (2003), of the internal node
+#' of the phylogenetic tree.
+#' @export gamma_node
+#'
+#' @examples
+#' all_trees <- phangorn::allTrees(5, rooted = TRUE)
+#' t <- all_trees[[3]]
+#' gamma_node(t, 8)
+#' # Output:  [1] 1
+#'
+#' @references Song, Y. S. (2003). On the combinatorics of rooted binary
+#' phylogenetic trees. \emph{ Annals of Combinatorics, 7(3):365?37}
+#'
+#'
+gamma_node <- function(tr, no) {
+  A <- phangorn::Ancestors(tr, no, type = "all")
+  G_no <- length(A) - 1
+  return(G_no)
+}
+
+#' Sum of gammas of a phylogenetic tree
+#'
+#' This function gives the sum of the gammas from a phylogenetic tree.
+#'
+#'
+#' @param tr Phylogenetic tree.
+#'
+#' @return The sum of the gammas from the internal nodes of a phylogenetic tree,
+#' defined in Song (2003).
+#' @export compute_gamma
+#'
+#' @examples
+#' all_trees <- phangorn::allTrees(5, rooted = TRUE)
+#' t <- all_trees[[9]]
+#' compute_gamma(t)
+#' # Output:  [1] 1
+#'
+#' @references Song, Y. S. (2003). On the combinatorics of rooted binary
+#' phylogenetic trees. \emph{ Annals of Combinatorics, 7(3):365?37}
+#'
+compute_gamma <- function(tr) {
+  n <- length(tr$tip.label)
+  N <- tr$Nnode
+  q_gammas <- N - 1
+  Gammas <- array(NA, dim = q_gammas)
+  for (i in (n + 2):(n + N)) {
+    Gammas[i - n - 1] <- gamma_node(tr, i)
+  }
+  return(sum(Gammas))
+}
+
+#' Size of the rSPR neighbourhood using the method of Song (2003)
+#'
+#' Compute the number of neighbours of a phylogenetic tree in the rSPR graph by
+#' the method described in Song (2003).
+#'
+#'
+#' @param phy Phylogenetic tree.
+#'
+#' @return The number of neighbours of a phylogenetic tree in the rSPR Graph.
+#' @export neighbour_size_song
+#'
+#' @examples
+#' all_trees <- phangorn::allTrees(5, rooted = TRUE)
+#' t <- all_trees[[3]]
+#' neighbour_size_song(t)
+#' # Output:  [1] 26
+#'
+#' @references Song, Y. S. (2003). On the combinatorics of rooted binary
+#' phylogenetic trees. \emph{ Annals of Com-binatorics, 7(3):365?37}
+#'
+#'
+neighbour_size_song <- function(phy) {
+  S_g <- compute_gamma(phy)
+  n <- length(phy$tip.label)
+  nei_size <- 2 * (n - 2) * (2 * n - 5) - 2 * S_g
+  
+  return(nei_size)
+}
+
 get_depths_and_sizes <- function(phy){
   n <- length(phy$tip.label)
   m <- phy$Nnode
@@ -63,14 +151,14 @@ N_of_u <- function(phy, du, x){
     }
   }
 }
-#' Compute the neighbourhood size in the rSPR graph
+#' Compute the neighbourhood size in the rSPR graph using the method from Matsen & Whidden (2017)
 #'
 #' @param phy a phylo object
 #'
 #' @return an integer counting how many neighbours a tree has in the rSPR graph.
-#' @export neighbourhood_size
+#' @export neighbourhood_size_matsen
 #'
-neighbourhood_size <- function(phy){
+neighbourhood_size_matsen <- function(phy){
   quantities <- get_depths_and_sizes(phy = phy)
   ds <- quantities$depths
   sizes <- quantities$sizes
@@ -80,9 +168,40 @@ neighbourhood_size <- function(phy){
     Ns[k] <- N_of_u(phy = phy,
                     du = ds[k], x = sizes[k])
   }
-  return(list(
-          info = data.frame(depth = ds, x = sizes, Nu = Ns),
-         n_size = sum(Ns)))
+  return(sum(Ns))
+}
+
+#' Compute the size of rSPR neighbourhood
+#'
+#' @param phy Phylogenetic Tree
+#' @param method Method used, could be "song" or "matsen"
+#'  where \code{song} uses the method by Song (2003) and \code{matsen} uses the
+#'  approach in Whidden and Matsen IV (2017). Default is method = "song".
+#'
+#' @return The size of the neighbourhood of a phylogenetic tree in the rSPR Graph
+#' @export neighbourhood_size
+#'
+#' @examples
+#' all_trees <- phangorn::allTrees(9, rooted = TRUE)
+#' t <- all_trees[[3]]
+#' neighbourhood_size(t, method = "song")
+#' neighbourhood_size(t, method = "matsen")
+#' # Output:  [1] 150
+#'
+#'
+#' @references Song, Y. S. (2003). On the combinatorics of rooted binary
+#' phylogenetic trees. \emph{ Annals of Com-binatorics, 7(3):365?37}
+#'
+#' Whidden, C. and Matsen IV, F. A. (2017). Ricci-Ollivier
+#' curvature of the rooted phylogenetic subtree-prune-regraft graph.
+#' \emph{ Theoretical Computer Science, 699:1?2}
+#'
+neighbourhood_size <- function(phy, method = "song") {
+  nei_size <- switch (method,
+                      song = neighbour_size_song(phy),
+                      matsen = neighbourhood_size_matsen(phy))
+  
+  return(nei_size)
 }
 
 #' Minimum rSPR neighbourhood size (i.e. for a ladder tree)

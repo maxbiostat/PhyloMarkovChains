@@ -12,12 +12,12 @@ t_mix_bounds(Tr_mat, varepislon = 0.01, pi_min)
 \item{varepislon}{The maximum distance fo the Markov Chain at a given time
 its stationary distribution.}
 
-\item{pi_mim}{The minimum value in the stationary distribution.}
+\item{pi_min}{The minimum value in the stationary distribution.}
 }
 \value{
-An array such that in the frist position a lower bound and the
+An array such that in the first position a lower bound and the
 second an upper bound for the mixing time of the Markov Chain with matrix
-trasition \code{Tr_mat}.
+transition \code{Tr_mat}.
 }
 \description{
 This function gives a lower and upper bounds for the mixing time of

@@ -2,16 +2,37 @@
 % Please edit documentation in R/neighbourhood.r
 \name{neighbourhood_size}
 \alias{neighbourhood_size}
-\title{Compute the neighbourhood size in the rSPR graph}
+\title{Compute the size of rSPR neighbourhood}
 \usage{
-neighbourhood_size(phy)
+neighbourhood_size(phy, method = "song")
 }
 \arguments{
-\item{phy}{a phylo object}
+\item{phy}{Phylogenetic Tree}
+
+\item{method}{Method used, could be "song" or "matsen"
+where \code{song} uses the method by Song (2003) and \code{matsen} uses the
+approach in Whidden and Matsen IV (2017). Default is method = "song".}
 }
 \value{
-an integer counting how many neighbours a tree has in the rSPR graph.
+The size of the neighbourhood of a phylogenetic tree in the rSPR Graph
 }
 \description{
-Compute the neighbourhood size in the rSPR graph
+Compute the size of rSPR neighbourhood
+}
+\examples{
+all_trees <- phangorn::allTrees(9, rooted = TRUE)
+t <- all_trees[[3]]
+neighbourhood_size(t, method = "song")
+neighbourhood_size(t, method = "matsen")
+# Output:  [1] 150
+
+
+}
+\references{
+Song, Y. S. (2003). On the combinatorics of rooted binary
+phylogenetic trees. \emph{ Annals of Com-binatorics, 7(3):365?37}
+
+Whidden, C. and Matsen IV, F. A. (2017). Ricci-Ollivier
+curvature of the rooted phylogenetic subtree-prune-regraft graph.
+\emph{ Theoretical Computer Science, 699:1?2}
 }
