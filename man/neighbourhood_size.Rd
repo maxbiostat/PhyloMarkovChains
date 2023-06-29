@@ -20,8 +20,7 @@ The size of the neighbourhood of a phylogenetic tree in the rSPR Graph
 Compute the size of rSPR neighbourhood
 }
 \examples{
-all_trees <- phangorn::allTrees(9, rooted = TRUE)
-t <- all_trees[[3]]
+t <- ape::rtree(5, rooted = TRUE)
 neighbourhood_size(t, method = "song")
 neighbourhood_size(t, method = "matsen")
 # Output:  [1] 150

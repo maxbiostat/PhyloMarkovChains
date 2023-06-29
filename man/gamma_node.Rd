@@ -4,10 +4,10 @@
 \alias{gamma_node}
 \title{Compute the gamma of an internal node}
 \usage{
-gamma_node(tr, no)
+gamma_node(phy, no)
 }
 \arguments{
-\item{tr}{Phylogenetic tree.}
+\item{phy}{Phylogenetic tree.}
 
 \item{no}{Internal node.}
 }
@@ -19,8 +19,8 @@ of the phylogenetic tree.
 This function gives the gamma of the internal node in a phylogenetic tree.
 }
 \examples{
-all_trees <- phangorn::allTrees(5, rooted = TRUE)
-t <- all_trees[[3]]
+
+t <- ape::rtree(5, rooted = TRUE)
 gamma_node(t, 8)
 # Output:  [1] 1
 

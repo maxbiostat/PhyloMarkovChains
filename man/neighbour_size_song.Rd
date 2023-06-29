@@ -17,8 +17,7 @@ Compute the number of neighbours of a phylogenetic tree in the rSPR graph by
 the method described in Song (2003).
 }
 \examples{
-all_trees <- phangorn::allTrees(5, rooted = TRUE)
-t <- all_trees[[3]]
+t <- ape::rtree(5, rooted = TRUE)
 neighbour_size_song(t)
 # Output:  [1] 26
 

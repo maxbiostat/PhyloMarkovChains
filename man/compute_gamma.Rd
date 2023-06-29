@@ -4,10 +4,10 @@
 \alias{compute_gamma}
 \title{Sum of gammas of a phylogenetic tree}
 \usage{
-compute_gamma(tr)
+compute_gamma(phy)
 }
 \arguments{
-\item{tr}{Phylogenetic tree.}
+\item{phy}{Phylogenetic tree.}
 }
 \value{
 The sum of the gammas from the internal nodes of a phylogenetic tree,
@@ -17,8 +17,7 @@ defined in Song (2003).
 This function gives the sum of the gammas from a phylogenetic tree.
 }
 \examples{
-all_trees <- phangorn::allTrees(5, rooted = TRUE)
-t <- all_trees[[9]]
+t <- ape::rtree(5, rooted = TRUE)
 compute_gamma(t)
 # Output:  [1] 1
 

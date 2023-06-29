@@ -35,7 +35,7 @@ makeLadder <- function(ntaxa){
 #'
 #'  This function gives the gamma of the internal node in a phylogenetic tree.
 #'
-#' @param tr Phylogenetic tree.
+#' @param phy Phylogenetic tree.
 #' @param no Internal node.
 #'
 #' @return The corresponding gamma, defined in Song (2003), of the internal node
@@ -43,8 +43,8 @@ makeLadder <- function(ntaxa){
 #' @export gamma_node
 #'
 #' @examples
-#' all_trees <- phangorn::allTrees(5, rooted = TRUE)
-#' t <- all_trees[[3]]
+#' 
+#' t <- ape::rtree(5, rooted = TRUE)
 #' gamma_node(t, 8)
 #' # Output:  [1] 1
 #'
@@ -52,8 +52,8 @@ makeLadder <- function(ntaxa){
 #' phylogenetic trees. \emph{ Annals of Combinatorics, 7(3):365?37}
 #'
 #'
-gamma_node <- function(tr, no) {
-  A <- phangorn::Ancestors(tr, no, type = "all")
+gamma_node <- function(phy, no) {
+  A <- phangorn::Ancestors(phy, no, type = "all")
   G_no <- length(A) - 1
   return(G_no)
 }
@@ -63,28 +63,27 @@ gamma_node <- function(tr, no) {
 #' This function gives the sum of the gammas from a phylogenetic tree.
 #'
 #'
-#' @param tr Phylogenetic tree.
+#' @param phy Phylogenetic tree.
 #'
 #' @return The sum of the gammas from the internal nodes of a phylogenetic tree,
 #' defined in Song (2003).
 #' @export compute_gamma
 #'
 #' @examples
-#' all_trees <- phangorn::allTrees(5, rooted = TRUE)
-#' t <- all_trees[[9]]
+#' t <- ape::rtree(5, rooted = TRUE)
 #' compute_gamma(t)
 #' # Output:  [1] 1
 #'
 #' @references Song, Y. S. (2003). On the combinatorics of rooted binary
 #' phylogenetic trees. \emph{ Annals of Combinatorics, 7(3):365?37}
 #'
-compute_gamma <- function(tr) {
-  n <- length(tr$tip.label)
-  N <- tr$Nnode
+compute_gamma <- function(phy) {
+  n <- length(phy$tip.label)
+  N <- phy$Nnode
   q_gammas <- N - 1
   Gammas <- array(NA, dim = q_gammas)
   for (i in (n + 2):(n + N)) {
-    Gammas[i - n - 1] <- gamma_node(tr, i)
+    Gammas[i - n - 1] <- gamma_node(phy, i)
   }
   return(sum(Gammas))
 }
@@ -101,8 +100,7 @@ compute_gamma <- function(tr) {
 #' @export neighbour_size_song
 #'
 #' @examples
-#' all_trees <- phangorn::allTrees(5, rooted = TRUE)
-#' t <- all_trees[[3]]
+#' t <- ape::rtree(5, rooted = TRUE)
 #' neighbour_size_song(t)
 #' # Output:  [1] 26
 #'
@@ -182,8 +180,7 @@ neighbourhood_size_matsen <- function(phy){
 #' @export neighbourhood_size
 #'
 #' @examples
-#' all_trees <- phangorn::allTrees(9, rooted = TRUE)
-#' t <- all_trees[[3]]
+#' t <- ape::rtree(5, rooted = TRUE)
 #' neighbourhood_size(t, method = "song")
 #' neighbourhood_size(t, method = "matsen")
 #' # Output:  [1] 150
