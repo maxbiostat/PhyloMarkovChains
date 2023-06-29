@@ -19,7 +19,6 @@ This function gives the sum of the gammas from a phylogenetic tree.
 \examples{
 t <- ape::rtree(5, rooted = TRUE)
 compute_gamma(t)
-# Output:  [1] 1
 
 }
 \references{

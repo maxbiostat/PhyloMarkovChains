@@ -46,7 +46,6 @@ makeLadder <- function(ntaxa){
 #' 
 #' t <- ape::rtree(5, rooted = TRUE)
 #' gamma_node(t, 8)
-#' # Output:  [1] 1
 #'
 #' @references Song, Y. S. (2003). On the combinatorics of rooted binary
 #' phylogenetic trees. \emph{ Annals of Combinatorics, 7(3):365?37}
@@ -72,7 +71,6 @@ gamma_node <- function(phy, no) {
 #' @examples
 #' t <- ape::rtree(5, rooted = TRUE)
 #' compute_gamma(t)
-#' # Output:  [1] 1
 #'
 #' @references Song, Y. S. (2003). On the combinatorics of rooted binary
 #' phylogenetic trees. \emph{ Annals of Combinatorics, 7(3):365?37}
@@ -102,10 +100,9 @@ compute_gamma <- function(phy) {
 #' @examples
 #' t <- ape::rtree(5, rooted = TRUE)
 #' neighbour_size_song(t)
-#' # Output:  [1] 26
 #'
 #' @references Song, Y. S. (2003). On the combinatorics of rooted binary
-#' phylogenetic trees. \emph{ Annals of Com-binatorics, 7(3):365?37}
+#' phylogenetic trees. \emph{ Annals of Combinatorics, 7(3):365?37}
 #'
 #'
 neighbour_size_song <- function(phy) {
@@ -183,7 +180,6 @@ neighbourhood_size_matsen <- function(phy){
 #' t <- ape::rtree(5, rooted = TRUE)
 #' neighbourhood_size(t, method = "song")
 #' neighbourhood_size(t, method = "matsen")
-#' # Output:  [1] 150
 #'
 #'
 #' @references Song, Y. S. (2003). On the combinatorics of rooted binary

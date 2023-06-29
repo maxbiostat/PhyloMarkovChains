@@ -23,7 +23,6 @@ Compute the size of rSPR neighbourhood
 t <- ape::rtree(5, rooted = TRUE)
 neighbourhood_size(t, method = "song")
 neighbourhood_size(t, method = "matsen")
-# Output:  [1] 150
 
 
 }

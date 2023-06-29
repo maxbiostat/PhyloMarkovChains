@@ -22,7 +22,6 @@ This function gives the gamma of the internal node in a phylogenetic tree.
 
 t <- ape::rtree(5, rooted = TRUE)
 gamma_node(t, 8)
-# Output:  [1] 1
 
 }
 \references{

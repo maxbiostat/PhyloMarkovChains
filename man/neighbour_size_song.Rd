@@ -19,10 +19,9 @@ the method described in Song (2003).
 \examples{
 t <- ape::rtree(5, rooted = TRUE)
 neighbour_size_song(t)
-# Output:  [1] 26
 
 }
 \references{
 Song, Y. S. (2003). On the combinatorics of rooted binary
-phylogenetic trees. \emph{ Annals of Com-binatorics, 7(3):365?37}
+phylogenetic trees. \emph{ Annals of Combinatorics, 7(3):365?37}
 }
