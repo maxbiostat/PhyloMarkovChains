@@ -15,7 +15,7 @@ make_MH_matrix <- function(incidence.mat) {
   neigh.ratios <- matrix(NA, nrow = K, ncol = K)
   diag(neigh.ratios) <- 0
   for (i in 1:K) {
-    neigh.ratios[i, ] <-
+    neigh.ratios[i,] <-
       sapply(neighbourhood.sizes[i] / neighbourhood.sizes,
              function(x)
                min(1, x)) /
@@ -43,17 +43,7 @@ make_lazy_MH_matrix <- function(MHMat, rho) {
   if (rho < 0 || rho > 1)
     stop("Rho must be a probability")
   
-  Ds <- diag(MHMat)
-  trans.mat.LazyMH <- matrix(NA, K, K)
-  
-  for (i in 1:K) {
-    if (Ds[i] == 0) {
-      trans.mat.LazyMH[i,-i] <- MHMat[i,-i]
-    } else{
-      trans.mat.LazyMH[i,-i] <- MHMat[i,-i] * (1 - rho) / (1 - Ds[i])
-    }
-  }
-  diag(trans.mat.LazyMH) <- ifelse(Ds > 0, rho, 0)
+  trans.mat.LazyMH <- (1 - rho) * MHMat + rho * diag(1, K)
   
   return(trans.mat.LazyMH)
 }
