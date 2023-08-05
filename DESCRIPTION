@@ -6,7 +6,7 @@ Authors@R:
            comment = c(ORCID = "0000-0001-5736-5578"))
 Description: Contains routines for simulating and studying Markov chains on the space of phylogenetic trees.
 Imports:
-    ape, apTreeshape,  phangorn, methods, markovchain
+    ape, apTreeshape,  phangorn, methods, markovchain, foreach, doParallel
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
